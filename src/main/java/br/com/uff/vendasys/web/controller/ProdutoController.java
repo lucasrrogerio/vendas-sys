@@ -1,12 +1,13 @@
 package br.com.uff.vendasys.web.controller;
 
+import br.com.uff.vendasys.domain.entity.Produto;
 import br.com.uff.vendasys.service.ProdutoService;
 import br.com.uff.vendasys.web.dto.ProdutoDTO;
+import br.com.uff.vendasys.web.mapper.MapperUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 @RestController
 @RequestMapping("produto")
@@ -15,9 +16,12 @@ public class ProdutoController {
     @Autowired
     ProdutoService produtoService;
 
+    MapperUtil mapperUtil = MapperUtil.getInstance();
+
     @GetMapping("{id}")
     public ProdutoDTO buscarPorId(@PathVariable Long id) {
-        produtoService.buscarPorId(id).orElse(null);
-        return null;
+        Produto produto = produtoService.buscarPorId(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NO_CONTENT));
+        return mapperUtil.mapTo(produto, ProdutoDTO.class);
     }
 }
