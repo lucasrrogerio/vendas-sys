@@ -20,7 +20,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     @Transactional
     @Override
-    public Usuario criarUsuario(@Valid Usuario usuario) {
+    public Usuario salvarUsuario(@Valid Usuario usuario) {
         return usuarioRepository.save(usuario);
     }
 
@@ -41,15 +41,19 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     @Transactional
     @Override
-    public Usuario alterarUsuario(Usuario usuarioAlterado) {
-        Usuario usuario = new Usuario();
+    public Usuario alterarUsuario(Long id, Usuario usuarioAlterado) {
+        Optional<Usuario> usuario = buscarPorId(id);
+        if (usuario.isEmpty()) return null;
         if (Objects.nonNull(usuarioAlterado.getNome()))
-            usuario.setNome(usuarioAlterado.getNome());
+            usuario.get().setNome(usuarioAlterado.getNome());
+        if (Objects.nonNull(usuarioAlterado.getEmail()))
+            usuario.get().setEmail(usuarioAlterado.getEmail());
         if (Objects.nonNull(usuarioAlterado.getTipoUsuario()))
-            usuario.setTipoUsuarioEnum(usuarioAlterado.getTipoUsuarioEnum());
-        return criarUsuario(usuario);
+            usuario.get().setTipoUsuarioEnum(usuarioAlterado.getTipoUsuarioEnum());
+        return salvarUsuario(usuario.get());
     }
 
+    @Transactional
     @Override
     public void removerUsuario(Long id) {
         buscarPorId(id).ifPresent(usuario -> usuarioRepository.delete(usuario));

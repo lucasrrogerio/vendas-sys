@@ -8,10 +8,10 @@ import java.util.Optional;
 
 public interface UsuarioService {
 
-    public Usuario criarUsuario(@Valid Usuario usuario);
-    public Optional<Usuario> buscarPorId(Long id);
-    public Optional<Usuario> buscarPorEmail(String email);
-    public List<Usuario> buscarTodosVendedores();
-    public Usuario alterarUsuario(@Valid Usuario usuario);
-    public void removerUsuario(Long id);
+    Usuario salvarUsuario(@Valid Usuario usuario);
+    Optional<Usuario> buscarPorId(Long id);
+    Optional<Usuario> buscarPorEmail(String email);
+    List<Usuario> buscarTodosVendedores();
+    Usuario alterarUsuario(Long id, @Valid Usuario usuario);
+    void removerUsuario(Long id);
 }

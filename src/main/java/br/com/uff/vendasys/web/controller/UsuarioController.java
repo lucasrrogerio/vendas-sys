@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("usuario")
@@ -22,21 +23,30 @@ public class UsuarioController {
     MapperUtil mapperUtil = MapperUtil.getInstance();
 
     @PostMapping
-    public UsuarioDTO criarUsuario(UsuarioDTO usuarioDTO) {
+    @ResponseStatus(HttpStatus.CREATED)
+    public UsuarioDTO criarUsuario(@RequestBody UsuarioDTO usuarioDTO) {
         Usuario usuario = mapperUtil.mapTo(usuarioDTO, Usuario.class);
-        return mapperUtil.mapTo(usuarioService.criarUsuario(usuario), UsuarioDTO.class);
+        return mapperUtil.mapTo(usuarioService.salvarUsuario(usuario), UsuarioDTO.class);
     }
 
     @GetMapping("{id}")
     public UsuarioDTO buscarPorId(@PathVariable Long id) {
         Usuario usuario = usuarioService.buscarPorId(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NO_CONTENT));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuario nao encontrado"));
         return mapperUtil.mapTo(usuario, UsuarioDTO.class);
     }
 
     @GetMapping("vendedores")
     public List<UsuarioDTO> buscarTodosVendedores() {
         return mapperUtil.toList(usuarioService.buscarTodosVendedores(), UsuarioDTO.class);
+    }
+
+    @PutMapping("{id}")
+    public UsuarioDTO alterarUsuario(@PathVariable Long id, @RequestBody UsuarioDTO usuarioDTO) {
+        Usuario usuario = usuarioService.alterarUsuario(id, mapperUtil.mapTo(usuarioDTO, Usuario.class));
+        if (Objects.isNull(usuario))
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuario nao encontrado");
+        return mapperUtil.mapTo(usuario, UsuarioDTO.class);
     }
 
     @DeleteMapping("{id}")

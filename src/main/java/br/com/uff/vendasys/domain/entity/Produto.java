@@ -1,5 +1,7 @@
 package br.com.uff.vendasys.domain.entity;
 
+import org.hibernate.annotations.Cascade;
+
 import javax.persistence.*;
 
 @Entity
@@ -16,13 +18,13 @@ public class Produto {
     private int qtdEstoque;
     private boolean isAtivo;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.MERGE)
     private Fornecedor fornecedor;
 
     @OneToOne(cascade = CascadeType.ALL)
     private Promocao promocao;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.MERGE)
     private Categoria categoria;
 
     public Produto() {

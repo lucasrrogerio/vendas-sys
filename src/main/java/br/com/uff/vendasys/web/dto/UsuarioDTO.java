@@ -1,22 +1,32 @@
 package br.com.uff.vendasys.web.dto;
 
 import br.com.uff.vendasys.domain.enums.TipoUsuario;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 
 public class UsuarioDTO {
+    public Long id;
     @Email
     public String email;
-    @NotBlank
     public String senha;
-    @NotBlank
     public String nome;
-    @NotNull
-    public TipoUsuario tipoUsuario;
+    @JsonProperty("tipoUsuario")
+    public TipoUsuario tipoUsuarioEnum;
+    @JsonIgnore
+    private String tipoUsuario;
 
     public UsuarioDTO() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getEmail() {
@@ -43,11 +53,19 @@ public class UsuarioDTO {
         this.nome = nome;
     }
 
-    public TipoUsuario getTipoUsuario() {
+    public TipoUsuario getTipoUsuarioEnum() {
+        return tipoUsuarioEnum;
+    }
+
+    public void setTipoUsuarioEnum(TipoUsuario tipoUsuarioEnum) {
+        this.tipoUsuarioEnum = tipoUsuarioEnum;
+    }
+
+    public String getTipoUsuario() {
         return tipoUsuario;
     }
 
-    public void setTipoUsuario(TipoUsuario tipoUsuario) {
+    public void setTipoUsuario(String tipoUsuario) {
         this.tipoUsuario = tipoUsuario;
     }
 }

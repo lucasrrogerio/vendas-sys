@@ -10,6 +10,7 @@ import java.util.List;
 /**
  * DAO gerado pelo Spring DATA
  * codigo boilerplate simplificado pelo Spring com JPA
+ * queries especificas criadas com ajuda de anotacao
  */
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {

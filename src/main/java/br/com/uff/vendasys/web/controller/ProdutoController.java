@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("produto")
 public class ProdutoController {
@@ -17,6 +19,25 @@ public class ProdutoController {
     ProdutoService produtoService;
 
     MapperUtil mapperUtil = MapperUtil.getInstance();
+
+    @PostMapping
+    public ProdutoDTO registrar() {
+        return  null;
+    }
+
+    @GetMapping
+    public List<ProdutoDTO> buscarTodos() {
+        return mapperUtil.toList(produtoService.buscarTodos(), ProdutoDTO.class);
+    }
+
+    @GetMapping("ativos")
+    public List<ProdutoDTO> buscarAtivos() {
+        return mapperUtil.toList(produtoService.buscarAtivos(), ProdutoDTO.class);
+    }
+    @GetMapping("categoira/{cod}")
+    public List<ProdutoDTO> buscarPorCategoria(@PathVariable String cod) {
+        return mapperUtil.toList(produtoService.buscarPorCategoria(cod), ProdutoDTO.class);
+    }
 
     @GetMapping("{id}")
     public ProdutoDTO buscarPorId(@PathVariable Long id) {
