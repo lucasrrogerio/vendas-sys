@@ -1,18 +1,68 @@
 package br.com.uff.vendasys.web.dto;
 
 public class ProdutoDTO {
-    private String codBarras;
-    private String nome;
-    private float preco;
-    private int qtdEstoque;
+
+    private Long id;
     private String urlImg;
+    private String nome;
     private String descricao;
+    private Double preco;
+    private int qtdEstoque;
+    private String codBarras;
+    private boolean isAtivo;
     private FornecedorDTO fornecedor;
     private PromocaoDTO promocao;
     private CategoriaDTO categoria;
-    private boolean isAtivo;
 
     public ProdutoDTO() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getUrlImg() {
+        return urlImg;
+    }
+
+    public void setUrlImg(String urlImg) {
+        this.urlImg = urlImg;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public Double getPreco() {
+        return preco;
+    }
+
+    public void setPreco(Double preco) {
+        this.preco = preco;
+    }
+
+    public int getQtdEstoque() {
+        return qtdEstoque;
+    }
+
+    public void setQtdEstoque(int qtdEstoque) {
+        this.qtdEstoque = qtdEstoque;
     }
 
     public String getCodBarras() {
@@ -23,20 +73,12 @@ public class ProdutoDTO {
         this.codBarras = codBarras;
     }
 
-    public float getPreco() {
-        return preco;
+    public boolean isAtivo() {
+        return isAtivo;
     }
 
-    public void setPreco(float preco) {
-        this.preco = preco;
-    }
-
-    public int getQtdEstoque() {
-        return qtdEstoque;
-    }
-
-    public void setQtdEstoque(int qtdEstoque) {
-        this.qtdEstoque = qtdEstoque;
+    public void setAtivo(boolean ativo) {
+        isAtivo = ativo;
     }
 
     public FornecedorDTO getFornecedor() {
@@ -55,43 +97,11 @@ public class ProdutoDTO {
         this.promocao = promocao;
     }
 
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public String getUrlImg() {
-        return urlImg;
-    }
-
-    public void setUrlImg(String urlImg) {
-        this.urlImg = urlImg;
-    }
-
-    public String getDescricao() {
-        return descricao;
-    }
-
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
-
     public CategoriaDTO getCategoria() {
         return categoria;
     }
 
     public void setCategoria(CategoriaDTO categoria) {
         this.categoria = categoria;
-    }
-
-    public boolean isAtivo() {
-        return isAtivo;
-    }
-
-    public void setAtivo(boolean ativo) {
-        isAtivo = ativo;
     }
 }

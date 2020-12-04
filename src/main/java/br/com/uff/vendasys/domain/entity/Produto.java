@@ -1,8 +1,8 @@
 package br.com.uff.vendasys.domain.entity;
 
-import org.hibernate.annotations.Cascade;
-
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Produto {
@@ -10,21 +10,24 @@ public class Produto {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String nome;
     private String urlImg;
+    @NotBlank
+    private String nome;
     private String descricao;
-    private String codBarras;
+    @NotNull
     private Double preco;
+    @NotNull
     private int qtdEstoque;
+    @NotBlank
+    private String codBarras;
     private boolean isAtivo;
-
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @ManyToOne
+    @NotNull
     private Fornecedor fornecedor;
-
     @OneToOne(cascade = CascadeType.ALL)
     private Promocao promocao;
-
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @ManyToOne
+    @NotNull
     private Categoria categoria;
 
     public Produto() {
