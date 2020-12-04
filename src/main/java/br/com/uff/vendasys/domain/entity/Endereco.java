@@ -1,6 +1,9 @@
 package br.com.uff.vendasys.domain.entity;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @Entity
 public class Endereco {
@@ -14,8 +17,6 @@ public class Endereco {
     private String complemento;
     private String cidade;
     private String uf;
-//    @OneToOne
-//    private Fornecedor fornecedor;
 
     public Endereco() {
     }
