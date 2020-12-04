@@ -1,12 +1,19 @@
 package br.com.uff.vendasys.service;
 
 import br.com.uff.vendasys.domain.entity.Produto;
-import org.springframework.stereotype.Service;
 
+import javax.validation.Valid;
+import java.util.List;
 import java.util.Optional;
 
-@Service
 public interface ProdutoService {
 
+    Produto salvarProduto(@Valid Produto produto);
     Optional<Produto> buscarPorId(Long id);
+    Produto alterarProduto(Long id, @Valid Produto produto);
+    List<Produto> buscarTodos();
+    List<Produto> buscarPorCategoria(String cod);
+    List<Produto> buscarAtivos();
+    void inativarProduto(Long id);
+    void removerProduto(Long id);
 }
