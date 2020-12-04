@@ -1,12 +1,24 @@
 package br.com.uff.vendasys.web.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class FornecedorDTO {
+
+    private Long id;
     private String cnpj;
-    private String cnpjFormatado;
     private String razaoSocial;
     private EnderecoDTO endereco;
 
     public FornecedorDTO() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getCnpj() {
@@ -15,14 +27,6 @@ public class FornecedorDTO {
 
     public void setCnpj(String cnpj) {
         this.cnpj = cnpj;
-    }
-
-    public String getCnpjFormatado() {
-        return cnpjFormatado;
-    }
-
-    public void setCnpjFormatado(String cnpjFormatado) {
-        this.cnpjFormatado = cnpjFormatado;
     }
 
     public String getRazaoSocial() {

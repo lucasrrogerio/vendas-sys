@@ -1,5 +1,7 @@
 package br.com.uff.vendasys.domain.entity;
 
+import org.hibernate.validator.constraints.br.CNPJ;
+
 import javax.persistence.*;
 
 @Entity
@@ -7,6 +9,8 @@ public class Fornecedor {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @Column(unique = true)
+    @CNPJ
     private String cnpj;
     private String razaoSocial;
     @OneToOne(cascade = CascadeType.ALL)

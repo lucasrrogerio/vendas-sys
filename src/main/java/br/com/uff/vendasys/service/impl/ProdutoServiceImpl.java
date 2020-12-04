@@ -10,7 +10,6 @@ import javax.transaction.Transactional;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 
 @Service
 public class ProdutoServiceImpl implements ProdutoService {
@@ -25,31 +24,29 @@ public class ProdutoServiceImpl implements ProdutoService {
     }
 
     @Override
-    public Optional<Produto> buscarPorId(Long id) {
-        return produtoRepository.findById(id);
+    public Produto buscarPorId(Long id) {
+        return produtoRepository.findById(id).orElse(null);
     }
 
     @Transactional
     @Override
     public Produto alterarProduto(Long id, @Valid Produto produtoAlterado) {
-        Optional<Produto> produto = buscarPorId(id);
+        Produto produto = buscarPorId(id);
 
-        if (produto.isEmpty()) return null;
+        if (Objects.isNull(produto)) return null;
 
         if (Objects.nonNull(produtoAlterado.getNome()))
-            produto.get().setNome(produtoAlterado.getNome());
+            produto.setNome(produtoAlterado.getNome());
         if (Objects.nonNull(produtoAlterado.getUrlImg()))
-            produto.get().setUrlImg(produtoAlterado.getUrlImg());
+            produto.setUrlImg(produtoAlterado.getUrlImg());
         if (Objects.nonNull(produtoAlterado.getDescricao()))
-            produto.get().setDescricao(produtoAlterado.getDescricao());
+            produto.setDescricao(produtoAlterado.getDescricao());
         if (Objects.nonNull(produtoAlterado.getCodBarras()))
-            produto.get().setCodBarras(produtoAlterado.getCodBarras());
+            produto.setCodBarras(produtoAlterado.getCodBarras());
         if (Objects.nonNull(produtoAlterado.getPreco()))
-            produto.get().setPreco(produtoAlterado.getPreco());
-        if (Objects.nonNull(produtoAlterado.getQtdEstoque()))
-            produto.get().setQtdEstoque(produtoAlterado.getQtdEstoque());
-
-        return salvarProduto(produto.get());
+            produto.setPreco(produtoAlterado.getPreco());
+        produto.setQtdEstoque(produtoAlterado.getQtdEstoque());
+        return salvarProduto(produto);
     }
 
     public void promocao() {
@@ -73,16 +70,17 @@ public class ProdutoServiceImpl implements ProdutoService {
 
     @Transactional
     @Override
-    public void inativarProduto(Long id) {
-        Optional<Produto> produto = buscarPorId(id);
-        if (produto.isEmpty()) return;
-        produto.get().setAtivo(false);
-        salvarProduto(produto.get());
+    public Produto inativarProduto(Long id) {
+        Produto produto = buscarPorId(id);
+        if (Objects.isNull(produto)) return null;
+        produto.setAtivo(false);
+        return salvarProduto(produto);
     }
 
     @Transactional
     @Override
     public void removerProduto(Long id) {
-        buscarPorId(id).ifPresent(prod -> produtoRepository.delete(prod));
+        Produto produto = buscarPorId(id);
+        if (Objects.nonNull(produto)) produtoRepository.delete(produto);
     }
 }

@@ -9,11 +9,11 @@ import java.util.Optional;
 public interface ProdutoService {
 
     Produto salvarProduto(@Valid Produto produto);
-    Optional<Produto> buscarPorId(Long id);
+    Produto buscarPorId(Long id);
     Produto alterarProduto(Long id, @Valid Produto produto);
     List<Produto> buscarTodos();
     List<Produto> buscarPorCategoria(String cod);
     List<Produto> buscarAtivos();
-    void inativarProduto(Long id);
+    Produto inativarProduto(Long id);
     void removerProduto(Long id);
 }
