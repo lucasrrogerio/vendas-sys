@@ -11,6 +11,7 @@ public class UsuarioDTO {
     public Long id;
     @Email
     public String email;
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     public String senha;
     public String nome;
     @JsonProperty("tipoUsuario")
