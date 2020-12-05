@@ -93,4 +93,9 @@ public class UsuarioController {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuario nao encontrado");
         usuarioService.removerUsuario(id);
     }
+
+    @GetMapping("login")
+    public void login() {
+    }
+
 }

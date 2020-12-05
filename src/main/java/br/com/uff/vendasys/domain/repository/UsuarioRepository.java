@@ -15,6 +15,8 @@ import java.util.List;
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
 
+    Usuario findByUsername(String username);
+
     @Query("SELECT u FROM Usuario u where LOWER(u.email) = LOWER(:email)")
     Usuario buscarPorEmail(String email);
 

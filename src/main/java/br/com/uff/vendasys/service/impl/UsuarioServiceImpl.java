@@ -1,13 +1,18 @@
 package br.com.uff.vendasys.service.impl;
 
 import br.com.uff.vendasys.domain.entity.Usuario;
+import br.com.uff.vendasys.domain.repository.RoleRepository;
 import br.com.uff.vendasys.domain.repository.UsuarioRepository;
 import br.com.uff.vendasys.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import javax.validation.Valid;
+import java.beans.Encoder;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -17,10 +22,16 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     @Autowired
     UsuarioRepository usuarioRepository;
+    @Autowired
+    RoleRepository roleRepository;
+    @Autowired
+    PasswordEncoder encoder;
 
     @Transactional
     @Override
     public Usuario salvarUsuario(@Valid Usuario usuario) {
+        usuario.setSenha(encoder.encode(usuario.getSenha()));
+        usuario.setRoles(Arrays.asList(roleRepository.findByName("ROLE_USER")));
         return usuarioRepository.save(usuario);
     }
 

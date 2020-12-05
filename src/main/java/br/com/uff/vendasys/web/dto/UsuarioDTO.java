@@ -5,13 +5,14 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
 
 public class UsuarioDTO {
     public Long id;
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    public String senha;
+    public String username;
     @Email
     public String email;
-    public String senha;
     public String nome;
     @JsonProperty("tipoUsuario")
     public TipoUsuario tipoUsuarioEnum;
@@ -29,20 +30,28 @@ public class UsuarioDTO {
         this.id = id;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     public String getSenha() {
         return senha;
     }
 
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getNome() {
