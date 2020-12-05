@@ -3,15 +3,13 @@ package br.com.uff.vendasys.web.controller;
 import br.com.uff.vendasys.domain.entity.Produto;
 import br.com.uff.vendasys.service.ProdutoService;
 import br.com.uff.vendasys.web.dto.ProdutoDTO;
-import br.com.uff.vendasys.web.mapper.MapperUtil;
+import br.com.uff.vendasys.web.utils.MapperUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 
 @RestController
