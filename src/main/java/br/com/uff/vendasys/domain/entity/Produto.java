@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull;
 public class Produto {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue
     private Long id;
     private String urlImg;
     @NotBlank

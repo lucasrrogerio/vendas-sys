@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull;
 @Entity
 public class Usuario {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue
     private Long id;
     private String nome;
     @Column(unique=true)

@@ -1,9 +1,8 @@
-package br.com.uff.vendasys.web.mapper;
+package br.com.uff.vendasys.web.utils;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
-import java.lang.reflect.Type;
 import java.util.List;
 import java.util.stream.Collectors;
 

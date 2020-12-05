@@ -7,7 +7,7 @@ import javax.persistence.*;
 @Entity
 public class Fornecedor {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue
     private Long id;
     @Column(unique = true)
     @CNPJ
