@@ -1,6 +1,7 @@
 package br.com.uff.vendasys.domain.entity;
 
 import br.com.uff.vendasys.domain.enums.TipoPagamento;
+import br.com.uff.vendasys.service.Pagamento;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -28,7 +29,14 @@ public class Venda {
     @OneToMany
     private List<ItemVenda> itens;
 
+    @Transient
+    public Pagamento pagamento;
+
     public Venda() {
+    }
+
+    public Venda(Pagamento pagamento) {
+        this.pagamento = pagamento;
     }
 
     public Long getId() {
@@ -95,5 +103,21 @@ public class Venda {
     public List<ItemVenda> removeItem(ItemVenda item) {
         this.itens.remove(item);
         return this.itens;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    public Pagamento getPagamento() {
+        return pagamento;
+    }
+
+    public void setPagamento(Pagamento pagamento) {
+        this.pagamento = pagamento;
     }
 }
