@@ -27,8 +27,6 @@ public class Cliente {
     private boolean vip;
     @ManyToOne
     private Endereco endereco;
-    @OneToMany
-    private List<Reclamacao> reclamacoes;
 
     public Cliente() {
     }
@@ -89,21 +87,4 @@ public class Cliente {
         this.endereco = endereco;
     }
 
-    public List<Reclamacao> getReclamacoes() {
-        return reclamacoes;
-    }
-
-    public void setReclamacoes(List<Reclamacao> reclamacoes) {
-        this.reclamacoes = reclamacoes;
-    }
-
-    public List<Reclamacao> addReclamacao(Reclamacao reclamacao) {
-        this.reclamacoes.add(reclamacao);
-        return this.reclamacoes;
-    }
-
-    public List<Reclamacao> removerReclamacao(Reclamacao reclamacao) {
-        this.reclamacoes.remove(reclamacao);
-        return this.reclamacoes;
-    }
 }

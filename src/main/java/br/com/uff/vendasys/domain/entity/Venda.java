@@ -1,7 +1,6 @@
 package br.com.uff.vendasys.domain.entity;
 
-import br.com.uff.vendasys.domain.enums.TipoPagamento;
-import br.com.uff.vendasys.service.Pagamento;
+import br.com.uff.vendasys.service.PagamentoStrategy;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -24,18 +23,15 @@ public class Venda {
     @NotNull
     private Cliente cliente;
     private Integer pontosResgatados;
-    @NotNull
-    private TipoPagamento tipoPagamento;
     @OneToMany
     private List<ItemVenda> itens;
-
     @Transient
-    public Pagamento pagamento;
+    public PagamentoStrategy pagamento;
 
     public Venda() {
     }
 
-    public Venda(Pagamento pagamento) {
+    public Venda(PagamentoStrategy pagamento) {
         this.pagamento = pagamento;
     }
 
@@ -79,14 +75,6 @@ public class Venda {
         this.pontosResgatados = pontosResgatados;
     }
 
-    public TipoPagamento getTipoPagamento() {
-        return tipoPagamento;
-    }
-
-    public void setTipoPagamento(TipoPagamento tipoPagamento) {
-        this.tipoPagamento = tipoPagamento;
-    }
-
     public List<ItemVenda> getItens() {
         return itens;
     }
@@ -113,11 +101,11 @@ public class Venda {
         this.cliente = cliente;
     }
 
-    public Pagamento getPagamento() {
+    public PagamentoStrategy getPagamento() {
         return pagamento;
     }
 
-    public void setPagamento(Pagamento pagamento) {
+    public void setPagamento(PagamentoStrategy pagamento) {
         this.pagamento = pagamento;
     }
 }

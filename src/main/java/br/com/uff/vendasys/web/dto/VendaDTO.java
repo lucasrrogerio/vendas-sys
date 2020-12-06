@@ -1,7 +1,5 @@
 package br.com.uff.vendasys.web.dto;
 
-import br.com.uff.vendasys.domain.enums.TipoPagamento;
-
 import java.time.LocalDateTime;
 import java.util.List;
 

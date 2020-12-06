@@ -4,7 +4,6 @@ import br.com.uff.vendasys.domain.entity.Produto;
 
 import javax.validation.Valid;
 import java.util.List;
-import java.util.Optional;
 
 public interface ProdutoService {
 

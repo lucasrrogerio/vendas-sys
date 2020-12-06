@@ -17,9 +17,9 @@ public class Produto {
     @NotNull
     private Double preco;
     @NotNull
-    private int qtdEstoque;
+    private Integer qtdEstoque;
     @NotBlank
-    private String codBarras;
+    private String codigoBarras;
     private boolean isAtivo;
     @ManyToOne
     @NotNull
@@ -65,12 +65,12 @@ public class Produto {
         this.descricao = descricao;
     }
 
-    public String getCodBarras() {
-        return codBarras;
+    public String getCodigoBarras() {
+        return codigoBarras;
     }
 
-    public void setCodBarras(String codBarras) {
-        this.codBarras = codBarras;
+    public void setCodigoBarras(String codBarras) {
+        this.codigoBarras = codBarras;
     }
 
     public Double getPreco() {
@@ -81,11 +81,11 @@ public class Produto {
         this.preco = preco;
     }
 
-    public int getQtdEstoque() {
+    public Integer getQtdEstoque() {
         return qtdEstoque;
     }
 
-    public void setQtdEstoque(int qtdEstoque) {
+    public void setQtdEstoque(Integer qtdEstoque) {
         this.qtdEstoque = qtdEstoque;
     }
 

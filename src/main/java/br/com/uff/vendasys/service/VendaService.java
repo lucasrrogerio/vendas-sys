@@ -13,6 +13,8 @@ public interface VendaService {
     Venda adicionarItem(Long id, ItemVenda item);
     Double calcularTotal(Long id);
     List<Venda> listarVendasPorData(Date data);
+    Venda registrarReclamacao(Venda venda);
+    void cancelarVenda(Venda venda);
     void registrarPagamentoDinheiro(Venda venda);
     void registrarPagamentoDebito(Venda venda);
     void registrarPagamentoCredito(Venda venda);

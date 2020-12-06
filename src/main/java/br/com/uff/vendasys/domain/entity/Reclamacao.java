@@ -3,6 +3,7 @@ package br.com.uff.vendasys.domain.entity;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PastOrPresent;
@@ -19,6 +20,8 @@ public class Reclamacao {
     private LocalDateTime data;
     @NotBlank
     private String comentario;
+    @OneToOne
+    private Venda venda;
 
     public Reclamacao() {
     }
@@ -45,5 +48,13 @@ public class Reclamacao {
 
     public void setComentario(String comentario) {
         this.comentario = comentario;
+    }
+
+    public Venda getVenda() {
+        return venda;
+    }
+
+    public void setVenda(Venda venda) {
+        this.venda = venda;
     }
 }

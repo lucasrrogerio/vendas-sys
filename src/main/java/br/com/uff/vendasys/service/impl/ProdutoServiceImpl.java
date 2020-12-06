@@ -41,8 +41,8 @@ public class ProdutoServiceImpl implements ProdutoService {
             produto.setUrlImg(produtoAlterado.getUrlImg());
         if (Objects.nonNull(produtoAlterado.getDescricao()))
             produto.setDescricao(produtoAlterado.getDescricao());
-        if (Objects.nonNull(produtoAlterado.getCodBarras()))
-            produto.setCodBarras(produtoAlterado.getCodBarras());
+        if (Objects.nonNull(produtoAlterado.getCodigoBarras()))
+            produto.setCodigoBarras(produtoAlterado.getCodigoBarras());
         if (Objects.nonNull(produtoAlterado.getPreco()))
             produto.setPreco(produtoAlterado.getPreco());
         produto.setQtdEstoque(produtoAlterado.getQtdEstoque());
