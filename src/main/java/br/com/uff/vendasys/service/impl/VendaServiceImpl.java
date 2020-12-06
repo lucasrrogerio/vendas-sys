@@ -1,8 +1,10 @@
 package br.com.uff.vendasys.service.impl;
 
-import br.com.uff.vendasys.domain.entity.ItemVenda;
+import br.com.uff.vendasys.domain.entity.Pagamento;
+import br.com.uff.vendasys.domain.entity.Reclamacao;
 import br.com.uff.vendasys.domain.entity.Venda;
 import br.com.uff.vendasys.domain.enums.StatusVenda;
+import br.com.uff.vendasys.domain.repository.ReclamacaoRepository;
 import br.com.uff.vendasys.domain.repository.VendaRepository;
 import br.com.uff.vendasys.service.PagamentoStrategy;
 import br.com.uff.vendasys.service.VendaService;
@@ -18,6 +20,8 @@ public class VendaServiceImpl implements VendaService {
 
     @Autowired
     VendaRepository vendaRepository;
+    @Autowired
+    ReclamacaoRepository reclamacaoRepository;
 
     @Override
     public Venda iniciarVenda(Venda venda) {
@@ -28,27 +32,21 @@ public class VendaServiceImpl implements VendaService {
 
     @Override
     public Venda buscarPorId(Long id) {
-        return null;
-    }
-
-    @Override
-    public Venda adicionarItem(Long id, ItemVenda item) {
-        return null;
-    }
-
-    @Override
-    public Double calcularTotal(Long id) {
-        return null;
+        return vendaRepository.findById(id).orElse(null);
     }
 
     @Override
     public List<Venda> listarVendasPorData(Date data) {
-        return null;
+        return vendaRepository.listarPorData(data);
     }
 
     @Override
-    public Venda registrarReclamacao(Venda venda) {
-        return null;
+    public void registrarReclamacao(Long idVenda, Reclamacao reclamacao) {
+        Venda venda = buscarPorId(id);
+        if (Objects.nonNull(venda)) {
+            reclamacao.setVenda(venda);
+            reclamacaoRepository.save(reclamacao);
+        }
     }
 
     @Override
@@ -60,9 +58,13 @@ public class VendaServiceImpl implements VendaService {
     }
 
     @Override
-    public void registrarPagamento(Venda venda, PagamentoStrategy pagamentoStrategy) {
-        venda.getPagamento().setPagamentoStrategy(pagamentoStrategy);
-        venda.getPagamento().pagamentoStrategy.registrarPagamento(venda.getPagamento());
+    public Venda registrarPagamento(Long id, PagamentoStrategy pagamentoStrategy) {
+        Venda venda = buscarPorId(id);
+        if (Objects.isNull(venda)) return  null;
+        Pagamento pagamento = venda.getPagamento();
+        pagamento.setPagamentoStrategy(pagamentoStrategy);
+        pagamento.getPagamentoStrategy().registrarPagamento(venda.getPagamento());
+        return  null;
     }
 
 }

@@ -1,11 +1,13 @@
 package br.com.uff.vendasys.web.controller;
 
+import br.com.uff.vendasys.domain.entity.Reclamacao;
 import br.com.uff.vendasys.domain.entity.Venda;
 import br.com.uff.vendasys.service.VendaService;
 import br.com.uff.vendasys.service.impl.PagamentoCredito;
 import br.com.uff.vendasys.service.impl.PagamentoDebito;
 import br.com.uff.vendasys.service.impl.PagamentoDinheiro;
 import br.com.uff.vendasys.service.impl.PagamentoPix;
+import br.com.uff.vendasys.web.dto.ReclamacaoDTO;
 import br.com.uff.vendasys.web.dto.VendaDTO;
 import br.com.uff.vendasys.web.utils.MapperUtil;
 import io.swagger.v3.oas.annotations.Operation;
@@ -21,7 +23,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.*;
+import java.util.Date;
+import java.util.List;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("venda")
@@ -33,7 +37,7 @@ public class VendaController {
 
     MapperUtil mapperUtil = MapperUtil.getInstance();
 
-    @Operation(summary = "")
+    @Operation(summary = "Inicializa uma venda com status ABERTA")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Venda iniciada")
     })
@@ -48,7 +52,7 @@ public class VendaController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Venda encontrada",
                     content = { @Content(mediaType = "application/json", schema = @Schema(implementation = VendaDTO.class)) }),
-            @ApiResponse(responseCode = "404", description = "Venda nao encontrada", content = @Content)
+            @ApiResponse(responseCode = "404", description = "Venda nao encontrada")
     })
     @GetMapping("{id}")
     public VendaDTO buscarPorId(@Parameter(description = "id de venda a ser encontrada") @PathVariable Long id) {
@@ -68,27 +72,44 @@ public class VendaController {
         return mapperUtil.toList(vendaService.listarVendasPorData(data), VendaDTO.class);
     }
 
-    @PostMapping("pagamento/dinheiro")
-    public Map<String, String> registrarPagamentoDinheiro(VendaDTO vendaDTO) {
-        vendaService.registrarPagamento(mapperUtil.mapTo(vendaDTO, Venda.class), new PagamentoDinheiro());
-        return Collections.singletonMap("message", "pagamento realizado com sucesso!");
+    @PostMapping("reclamacao")
+    public void registrarReclamacao(Long id, ReclamacaoDTO reclamacaoDTO) {
+        vendaService.registrarReclamacao(id, mapperUtil.mapTo(reclamacaoDTO, Reclamacao.class));
     }
 
-    @PostMapping("pagamento/debito")
-    public Map<String, String> registrarPagamentoDebito(VendaDTO vendaDTO) {
-        vendaService.registrarPagamento(mapperUtil.mapTo(vendaDTO, Venda.class), new PagamentoDebito());
-        return Collections.singletonMap("message", "pagamento realizado com sucesso!");
+    @PutMapping("cancelar")
+    public VendaDTO cancelarVenda(Long id) {
+        Venda venda = vendaService.cancelarVenda(id);
+        return mapperUtil.mapTo(venda, VendaDTO.class);
     }
 
-    @PostMapping("pagamento/credito")
-    public Map<String, String> registrarPagamentocredito(VendaDTO vendaDTO) {
-        vendaService.registrarPagamento(mapperUtil.mapTo(vendaDTO, Venda.class), new PagamentoCredito());
-        return Collections.singletonMap("message", "pagamento realizado com sucesso!");
+    @PutMapping("pagamento/dinheiro")
+    public VendaDTO registrarPagamentoDinheiro(Long id) {
+        Venda venda = vendaService.registrarPagamento(id, new PagamentoDinheiro());
+        return mapperUtil.mapTo(venda, VendaDTO.class);
     }
 
-    @PostMapping("pagamento/pix")
-    public Map<String, String> registrarPagamentoPix(VendaDTO vendaDTO) {
-        vendaService.registrarPagamento(mapperUtil.mapTo(vendaDTO, Venda.class), new PagamentoPix());
-        return Collections.singletonMap("message", "pagamento realizado com sucesso!");
+    @PutMapping("pagamento/debito")
+    public VendaDTO registrarPagamentoDebito(Long id) {
+        Venda venda = vendaService.registrarPagamento(id, new PagamentoDebito());
+        return mapperUtil.mapTo(venda, VendaDTO.class);
     }
+
+    @PutMapping("pagamento/credito")
+    public VendaDTO registrarPagamentocredito(Long id) {
+        Venda venda = vendaService.registrarPagamento(id, new PagamentoCredito());
+        return mapperUtil.mapTo(venda, VendaDTO.class);
+    }
+
+    @PutMapping("pagamento/pix")
+    public VendaDTO registrarPagamentoPix(Long id) {
+        Venda venda = vendaService.registrarPagamento(id, new PagamentoPix());
+        return mapperUtil.mapTo(venda, VendaDTO.class);
+    }
+
+    @PutMapping("finalizar")
+    public void finalizarVenda(Long id) {
+        vendaService.finalizar(id);
+    }
+
 }
