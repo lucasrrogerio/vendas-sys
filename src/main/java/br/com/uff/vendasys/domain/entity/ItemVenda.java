@@ -18,9 +18,9 @@ public class ItemVenda {
     @NotNull
     private Integer quantidade;
     @NotNull
-    private Double preco;
-    @NotNull
-    private Double promocao;
+    private Double precoVenda;
+    private Double precoPromocao;
+    private boolean isPromocao;
 
     public ItemVenda() {
     }
@@ -49,19 +49,27 @@ public class ItemVenda {
         this.quantidade = quantidade;
     }
 
-    public Double getPreco() {
-        return preco;
+    public Double getPrecoVenda() {
+        return precoVenda;
     }
 
-    public void setPreco(Double preco) {
-        this.preco = preco;
+    public void setPrecoVenda(Double precoVenda) {
+        this.precoVenda = precoVenda;
     }
 
-    public Double getPromocao() {
-        return promocao;
+    public Double getPrecoPromocao() {
+        return precoPromocao;
     }
 
-    public void setPromocao(Double promocao) {
-        this.promocao = promocao;
+    public void setPrecoPromocao(Double precoPromocao) {
+        this.precoPromocao = precoPromocao;
+    }
+
+    public boolean isPromocao() {
+        return isPromocao;
+    }
+
+    public void setPromocao(boolean promocao) {
+        isPromocao = promocao;
     }
 }

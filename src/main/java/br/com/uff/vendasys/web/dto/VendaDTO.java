@@ -1,6 +1,7 @@
 package br.com.uff.vendasys.web.dto;
 
-import br.com.uff.vendasys.domain.enums.TipoPagamento;
+import br.com.uff.vendasys.domain.entity.Cliente;
+import br.com.uff.vendasys.domain.entity.ItemVenda;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -11,10 +12,10 @@ public class VendaDTO {
     private LocalDateTime data;
     private Double total;
     private boolean isVip;
-    private ClienteDTO cliente;
+    private Cliente cliente;
     private Integer pontosResgatados;
-    private TipoPagamento tipoPagamento;
-    private List<ItemVendaDTO> itens;
+    private List<ItemVenda> itens;
+    private PagamentoDTO pagamento;
 
     public VendaDTO() {
     }
@@ -51,11 +52,11 @@ public class VendaDTO {
         isVip = vip;
     }
 
-    public ClienteDTO getCliente() {
+    public Cliente getCliente() {
         return cliente;
     }
 
-    public void setCliente(ClienteDTO cliente) {
+    public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
 
@@ -67,19 +68,19 @@ public class VendaDTO {
         this.pontosResgatados = pontosResgatados;
     }
 
-    public TipoPagamento getTipoPagamento() {
-        return tipoPagamento;
-    }
-
-    public void setTipoPagamento(TipoPagamento tipoPagamento) {
-        this.tipoPagamento = tipoPagamento;
-    }
-
-    public List<ItemVendaDTO> getItens() {
+    public List<ItemVenda> getItens() {
         return itens;
     }
 
-    public void setItens(List<ItemVendaDTO> itens) {
+    public void setItens(List<ItemVenda> itens) {
         this.itens = itens;
+    }
+
+    public PagamentoDTO getPagamento() {
+        return pagamento;
+    }
+
+    public void setPagamento(PagamentoDTO pagamento) {
+        this.pagamento = pagamento;
     }
 }

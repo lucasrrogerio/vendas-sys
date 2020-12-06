@@ -1,5 +1,6 @@
 package br.com.uff.vendasys.domain.entity;
 
+import br.com.uff.vendasys.domain.enums.StatusVenda;
 import br.com.uff.vendasys.domain.enums.TipoPagamento;
 
 import javax.persistence.*;
@@ -23,10 +24,11 @@ public class Venda {
     @NotNull
     private Cliente cliente;
     private Integer pontosResgatados;
-    @NotNull
-    private TipoPagamento tipoPagamento;
     @OneToMany
     private List<ItemVenda> itens;
+    @OneToOne
+    private Pagamento pagamento;
+    private StatusVenda statusVenda;
 
     public Venda() {
     }
@@ -63,20 +65,20 @@ public class Venda {
         isVip = vip;
     }
 
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
     public Integer getPontosResgatados() {
         return pontosResgatados;
     }
 
     public void setPontosResgatados(Integer pontosResgatados) {
         this.pontosResgatados = pontosResgatados;
-    }
-
-    public TipoPagamento getTipoPagamento() {
-        return tipoPagamento;
-    }
-
-    public void setTipoPagamento(TipoPagamento tipoPagamento) {
-        this.tipoPagamento = tipoPagamento;
     }
 
     public List<ItemVenda> getItens() {
@@ -87,13 +89,19 @@ public class Venda {
         this.itens = itens;
     }
 
-    public List<ItemVenda> addItem(ItemVenda item) {
-        this.itens.add(item);
-        return this.itens;
+    public Pagamento getPagamento() {
+        return pagamento;
     }
 
-    public List<ItemVenda> removeItem(ItemVenda item) {
-        this.itens.remove(item);
-        return this.itens;
+    public void setPagamento(Pagamento pagamento) {
+        this.pagamento = pagamento;
+    }
+
+    public StatusVenda getStatusVenda() {
+        return statusVenda;
+    }
+
+    public void setStatusVenda(StatusVenda statusVenda) {
+        this.statusVenda = statusVenda;
     }
 }
