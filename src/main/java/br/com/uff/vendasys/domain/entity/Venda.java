@@ -1,6 +1,7 @@
 package br.com.uff.vendasys.domain.entity;
 
-import br.com.uff.vendasys.service.PagamentoStrategy;
+import br.com.uff.vendasys.domain.enums.StatusVenda;
+import br.com.uff.vendasys.domain.enums.TipoPagamento;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -25,14 +26,12 @@ public class Venda {
     private Integer pontosResgatados;
     @OneToMany
     private List<ItemVenda> itens;
-    @Transient
-    public PagamentoStrategy pagamento;
+    private TipoPagamento tipoPagamento;
+    @OneToOne
+    private Pagamento pagamento;
+    private StatusVenda statusVenda;
 
     public Venda() {
-    }
-
-    public Venda(PagamentoStrategy pagamento) {
-        this.pagamento = pagamento;
     }
 
     public Long getId() {
@@ -67,6 +66,14 @@ public class Venda {
         isVip = vip;
     }
 
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
     public Integer getPontosResgatados() {
         return pontosResgatados;
     }
@@ -83,29 +90,27 @@ public class Venda {
         this.itens = itens;
     }
 
-    public List<ItemVenda> addItem(ItemVenda item) {
-        this.itens.add(item);
-        return this.itens;
+    public TipoPagamento getTipoPagamento() {
+        return tipoPagamento;
     }
 
-    public List<ItemVenda> removeItem(ItemVenda item) {
-        this.itens.remove(item);
-        return this.itens;
+    public void setTipoPagamento(TipoPagamento tipoPagamento) {
+        this.tipoPagamento = tipoPagamento;
     }
 
-    public Cliente getCliente() {
-        return cliente;
-    }
-
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
-    }
-
-    public PagamentoStrategy getPagamento() {
+    public Pagamento getPagamento() {
         return pagamento;
     }
 
-    public void setPagamento(PagamentoStrategy pagamento) {
+    public void setPagamento(Pagamento pagamento) {
         this.pagamento = pagamento;
+    }
+
+    public StatusVenda getStatusVenda() {
+        return statusVenda;
+    }
+
+    public void setStatusVenda(StatusVenda statusVenda) {
+        this.statusVenda = statusVenda;
     }
 }

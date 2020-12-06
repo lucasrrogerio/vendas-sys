@@ -1,5 +1,7 @@
 package br.com.uff.vendasys.service;
 
+import br.com.uff.vendasys.domain.entity.Pagamento;
+
 public interface PagamentoStrategy {
-    void registrarPagamento();
+    Pagamento registrarPagamento(Pagamento pagamento);
 }

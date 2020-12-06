@@ -2,18 +2,28 @@ package br.com.uff.vendasys.service.impl;
 
 import br.com.uff.vendasys.domain.entity.ItemVenda;
 import br.com.uff.vendasys.domain.entity.Venda;
+import br.com.uff.vendasys.domain.enums.StatusVenda;
+import br.com.uff.vendasys.domain.repository.VendaRepository;
+import br.com.uff.vendasys.service.PagamentoStrategy;
 import br.com.uff.vendasys.service.VendaService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class VendaServiceImpl implements VendaService {
 
-    @Override
-    public void iniciarVenda() {
+    @Autowired
+    VendaRepository vendaRepository;
 
+    @Override
+    public Venda iniciarVenda(Venda venda) {
+        // TODO usar builder
+        //Venda venda = new Venda();
+        return vendaRepository.save(venda);
     }
 
     @Override
@@ -37,27 +47,22 @@ public class VendaServiceImpl implements VendaService {
     }
 
     @Override
-    public void registrarPagamentoDinheiro(Venda venda) {
-        venda.setPagamento(new PagamentoDinheiro());
-        venda.pagamento.registrarPagamento();
+    public Venda registrarReclamacao(Venda venda) {
+        return null;
     }
 
     @Override
-    public void registrarPagamentoDebito(Venda venda) {
-        venda.setPagamento(new PagamentoDebito());
-        venda.pagamento.registrarPagamento();
+    public Venda cancelarVenda(Long id) {
+        Venda venda = buscarPorId(id);
+        if (Objects.isNull(venda)) return  null;
+        venda.setStatusVenda(StatusVenda.CANCELADA);
+        return vendaRepository.save(venda);
     }
 
     @Override
-    public void registrarPagamentoCredito(Venda venda) {
-        venda.setPagamento(new PagamentoCredito());
-        venda.pagamento.registrarPagamento();
-    }
-
-    @Override
-    public void registrarPagamentoPix(Venda venda) {
-        venda.setPagamento(new PagamentoPix());
-        venda.pagamento.registrarPagamento();
+    public void registrarPagamento(Venda venda, PagamentoStrategy pagamentoStrategy) {
+        venda.getPagamento().setPagamentoStrategy(pagamentoStrategy);
+        venda.getPagamento().pagamentoStrategy.registrarPagamento(venda.getPagamento());
     }
 
 }
