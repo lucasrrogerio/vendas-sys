@@ -3,6 +3,7 @@ package br.com.uff.vendasys.web.controller;
 import br.com.uff.vendasys.domain.entity.Reclamacao;
 import br.com.uff.vendasys.domain.entity.Venda;
 import br.com.uff.vendasys.service.VendaService;
+import br.com.uff.vendasys.service.exception.PagamentoException;
 import br.com.uff.vendasys.service.impl.PagamentoCredito;
 import br.com.uff.vendasys.service.impl.PagamentoDebito;
 import br.com.uff.vendasys.service.impl.PagamentoDinheiro;
@@ -109,7 +110,11 @@ public class VendaController {
 
     @PutMapping("finalizar")
     public void finalizarVenda(Long id) {
-        vendaService.finalizar(id);
+        try {
+            vendaService.finalizar(id);
+        } catch (PagamentoException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Pagamento nao finalizado");
+        }
     }
 
 }

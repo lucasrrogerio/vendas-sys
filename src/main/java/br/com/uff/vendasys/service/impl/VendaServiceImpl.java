@@ -8,14 +8,17 @@ import br.com.uff.vendasys.domain.repository.ReclamacaoRepository;
 import br.com.uff.vendasys.domain.repository.VendaRepository;
 import br.com.uff.vendasys.service.PagamentoStrategy;
 import br.com.uff.vendasys.service.VendaService;
+import br.com.uff.vendasys.service.exception.PagamentoException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
 @Service
+@Transactional
 public class VendaServiceImpl implements VendaService {
 
     @Autowired
@@ -42,7 +45,7 @@ public class VendaServiceImpl implements VendaService {
 
     @Override
     public void registrarReclamacao(Long idVenda, Reclamacao reclamacao) {
-        Venda venda = buscarPorId(id);
+        Venda venda = buscarPorId(idVenda);
         if (Objects.nonNull(venda)) {
             reclamacao.setVenda(venda);
             reclamacaoRepository.save(reclamacao);
@@ -65,6 +68,15 @@ public class VendaServiceImpl implements VendaService {
         pagamento.setPagamentoStrategy(pagamentoStrategy);
         pagamento.getPagamentoStrategy().registrarPagamento(venda.getPagamento());
         return  null;
+    }
+
+    @Override
+    public void finalizar(Long id) throws PagamentoException {
+        Venda venda = buscarPorId(id);
+        if (Objects.isNull(venda)) return;
+        if (venda.getPagamento().isPago()) throw new PagamentoException("Pagamento nao realizado");
+        venda.setStatusVenda(StatusVenda.FINALIZADA);
+        vendaRepository.save(venda);
     }
 
 }

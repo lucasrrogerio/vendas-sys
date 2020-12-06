@@ -26,7 +26,6 @@ public class Venda {
     private Integer pontosResgatados;
     @OneToMany
     private List<ItemVenda> itens;
-    private TipoPagamento tipoPagamento;
     @OneToOne
     private Pagamento pagamento;
     private StatusVenda statusVenda;
@@ -88,14 +87,6 @@ public class Venda {
 
     public void setItens(List<ItemVenda> itens) {
         this.itens = itens;
-    }
-
-    public TipoPagamento getTipoPagamento() {
-        return tipoPagamento;
-    }
-
-    public void setTipoPagamento(TipoPagamento tipoPagamento) {
-        this.tipoPagamento = tipoPagamento;
     }
 
     public Pagamento getPagamento() {

@@ -56,6 +56,6 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Transactional
     @Override
     public void removerUsuario(Long id) {
-        buscarPorId(id).ifPresent(usuario -> usuarioRepository.delete(usuario));
+        usuarioRepository.deleteById(id);
     }
 }

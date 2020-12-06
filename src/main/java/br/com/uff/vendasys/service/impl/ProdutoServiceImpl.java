@@ -80,7 +80,6 @@ public class ProdutoServiceImpl implements ProdutoService {
     @Transactional
     @Override
     public void removerProduto(Long id) {
-        Produto produto = buscarPorId(id);
-        if (Objects.nonNull(produto)) produtoRepository.delete(produto);
+        produtoRepository.deleteById(id);
     }
 }
