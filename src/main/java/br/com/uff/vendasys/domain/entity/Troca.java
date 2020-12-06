@@ -17,8 +17,7 @@ public class Troca {
     private LocalDateTime data;
     @OneToOne
     private ItemVenda produto;
-    @OneToOne
-    private Venda venda;
+    private String motivo;
 
     public Troca() {
     }
@@ -45,13 +44,5 @@ public class Troca {
 
     public void setProduto(ItemVenda produto) {
         this.produto = produto;
-    }
-
-    public Venda getVenda() {
-        return venda;
-    }
-
-    public void setVenda(Venda venda) {
-        this.venda = venda;
     }
 }
