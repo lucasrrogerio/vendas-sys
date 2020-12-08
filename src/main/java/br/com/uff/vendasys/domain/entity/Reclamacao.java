@@ -21,7 +21,7 @@ public class Reclamacao {
     @NotBlank
     private String comentario;
     @OneToOne
-    private Venda venda;
+    private Cliente cliente;
 
     public Reclamacao() {
     }
@@ -50,11 +50,11 @@ public class Reclamacao {
         this.comentario = comentario;
     }
 
-    public Venda getVenda() {
-        return venda;
+    public Cliente getCliente() {
+        return cliente;
     }
 
-    public void setVenda(Venda venda) {
-        this.venda = venda;
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 }

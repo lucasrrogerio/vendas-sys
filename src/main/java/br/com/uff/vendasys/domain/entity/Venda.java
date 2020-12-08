@@ -1,7 +1,6 @@
 package br.com.uff.vendasys.domain.entity;
 
 import br.com.uff.vendasys.domain.enums.StatusVenda;
-import br.com.uff.vendasys.domain.enums.TipoPagamento;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -19,7 +18,7 @@ public class Venda {
     @NotNull
     private Double total;
     @NotNull
-    private boolean isVip;
+    private boolean pediuResgate;
     @ManyToOne
     @NotNull
     private Cliente cliente;
@@ -28,6 +27,8 @@ public class Venda {
     private List<ItemVenda> itens;
     @OneToOne
     private Pagamento pagamento;
+    @Transient
+    public NotaFiscal notaFiscal;
     private StatusVenda statusVenda;
 
     public Venda() {
@@ -57,12 +58,12 @@ public class Venda {
         this.total = total;
     }
 
-    public boolean isVip() {
-        return isVip;
+    public boolean pediuResgate() {
+        return pediuResgate;
     }
 
-    public void setVip(boolean vip) {
-        isVip = vip;
+    public void setPediuResgate(boolean pediuResgate) {
+        this.pediuResgate = pediuResgate;
     }
 
     public Cliente getCliente() {
@@ -95,6 +96,14 @@ public class Venda {
 
     public void setPagamento(Pagamento pagamento) {
         this.pagamento = pagamento;
+    }
+
+    public NotaFiscal getNotaFiscal() {
+        return notaFiscal;
+    }
+
+    public void setNotaFiscal(NotaFiscal notaFiscal) {
+        this.notaFiscal = notaFiscal;
     }
 
     public StatusVenda getStatusVenda() {

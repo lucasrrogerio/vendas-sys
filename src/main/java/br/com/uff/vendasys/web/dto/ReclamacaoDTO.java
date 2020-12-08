@@ -1,14 +1,12 @@
 package br.com.uff.vendasys.web.dto;
 
-import br.com.uff.vendasys.domain.entity.Venda;
-
 import java.time.LocalDateTime;
 
 public class ReclamacaoDTO {
 
     private LocalDateTime data;
     private String comentario;
-    private Venda venda;
+    private ClienteDTO clienteDTO;
 
     public ReclamacaoDTO() {
     }
@@ -29,11 +27,11 @@ public class ReclamacaoDTO {
         this.comentario = comentario;
     }
 
-    public Venda getVenda() {
-        return venda;
+    public ClienteDTO getClienteDTO() {
+        return clienteDTO;
     }
 
-    public void setVenda(Venda venda) {
-        this.venda = venda;
+    public void setClienteDTO(ClienteDTO clienteDTO) {
+        this.clienteDTO = clienteDTO;
     }
 }
