@@ -3,6 +3,7 @@ package br.com.uff.vendasys.domain.repository;
 import br.com.uff.vendasys.domain.entity.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -21,6 +22,6 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
     @Query("SELECT u FROM Usuario u where u.tipoUsuario = 'VENDEDOR'")
     List<Usuario> buscarTodosVendedores();
 
-//    @Query("SELECT u FROM Usuario u WHERE u.email = :email AND u.senha = :senha")
-//    Usuario autenticar(String email, String senha);
+    @Query("SELECT u FROM Usuario u WHERE u.email = :email AND u.senha = :senha")
+    Usuario login(String email, String senha);
 }
