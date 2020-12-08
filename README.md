@@ -7,7 +7,7 @@ Esse projeto consiste em uma aplicação Web para gerenciamento de vendas de um 
 
 Para rodar localmente a aplicação backend, no PowerShell rode o comando `mvn spring-boot:run`. O endereço base da aplicação é http://localhost:8080.
 
-Além disso, é necessário ter configurar a url, username e senha para o banco em `application.properties`.
+Além disso, é necessário configurar a url, username e senha para o banco em `application.properties`.
 
 ## 2. Estrutura do projeto
 
