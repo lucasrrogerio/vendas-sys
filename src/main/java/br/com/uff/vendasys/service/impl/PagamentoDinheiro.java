@@ -7,11 +7,8 @@ public class PagamentoDinheiro implements PagamentoStrategy {
 
     @Override
     public Pagamento registrarPagamento(Pagamento pagamento) {
-        pagamento.setTroco(calcularTroco());
-        return null;
-    }
-
-    private Double calcularTroco() {
-        return null;
+        pagamento.setTroco(pagamento.getTotalVenda() - pagamento.getTotalPago());
+        pagamento.setPago(true);
+        return pagamento;
     }
 }

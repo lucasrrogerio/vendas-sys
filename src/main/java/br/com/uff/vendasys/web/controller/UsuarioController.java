@@ -51,8 +51,9 @@ public class UsuarioController {
     })
     @GetMapping("/{id}")
     public UsuarioDTO buscarPorId(@Parameter(description = "id do usuario a ser buscado") @PathVariable Long id) {
-        Usuario usuario = usuarioService.buscarPorId(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuario nao encontrado"));
+        Usuario usuario = usuarioService.buscarPorId(id);
+        if (Objects.isNull(usuario))
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuario nao encontrado");
         return mapperUtil.mapTo(usuario, UsuarioDTO.class);
     }
 
@@ -89,7 +90,7 @@ public class UsuarioController {
     @DeleteMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void remover(@Parameter(description = "id de usuario a ser removido") @PathVariable Long id) {
-        if (usuarioService.buscarPorId(id).isEmpty())
+        if (Objects.isNull(usuarioService.buscarPorId(id)))
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuario nao encontrado");
         usuarioService.removerUsuario(id);
     }

@@ -1,8 +1,5 @@
 package br.com.uff.vendasys.web.dto;
 
-import br.com.uff.vendasys.domain.entity.Cliente;
-import br.com.uff.vendasys.domain.entity.ItemVenda;
-
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -12,9 +9,9 @@ public class VendaDTO {
     private LocalDateTime data;
     private Double total;
     private boolean isVip;
-    private Cliente cliente;
+    private ClienteDTO cliente;
     private Integer pontosResgatados;
-    private List<ItemVenda> itens;
+    private List<ItemVendaDTO> itens;
     private PagamentoDTO pagamento;
 
     public VendaDTO() {
@@ -52,11 +49,11 @@ public class VendaDTO {
         isVip = vip;
     }
 
-    public Cliente getCliente() {
+    public ClienteDTO getCliente() {
         return cliente;
     }
 
-    public void setCliente(Cliente cliente) {
+    public void setCliente(ClienteDTO cliente) {
         this.cliente = cliente;
     }
 
@@ -68,11 +65,11 @@ public class VendaDTO {
         this.pontosResgatados = pontosResgatados;
     }
 
-    public List<ItemVenda> getItens() {
+    public List<ItemVendaDTO> getItens() {
         return itens;
     }
 
-    public void setItens(List<ItemVenda> itens) {
+    public void setItens(List<ItemVendaDTO> itens) {
         this.itens = itens;
     }
 

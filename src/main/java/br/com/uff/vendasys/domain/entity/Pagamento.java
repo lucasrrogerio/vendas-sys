@@ -15,9 +15,10 @@ public class Pagamento {
     private Long id;
     @Transient
     public PagamentoStrategy pagamentoStrategy;
+    private Double totalVenda;
     private Double totalPago;
     private Double troco;
-    private boolean pago;
+    private boolean pago = false;
 
     public Pagamento() {
     }
@@ -40,6 +41,14 @@ public class Pagamento {
 
     public void setPagamentoStrategy(PagamentoStrategy pagamentoStrategy) {
         this.pagamentoStrategy = pagamentoStrategy;
+    }
+
+    public Double getTotalVenda() {
+        return totalVenda;
+    }
+
+    public void setTotalVenda(Double totalVenda) {
+        this.totalVenda = totalVenda;
     }
 
     public Double getTotalPago() {
