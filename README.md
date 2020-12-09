@@ -5,7 +5,7 @@ Esse projeto consiste em uma aplicação Web para gerenciamento de vendas de um 
 
 ## 1. Compilando o código
 
-Para rodar localmente a aplicação backend, no PowerShell rode o comando `mvn spring-boot:run`. O endereço base da aplicação é http://localhost:8080.
+Para rodar localmente a aplicação backend, no PowerShell rode o comando `mvn spring-boot:run`. O endereço base da aplicação é http://localhost:8083.
 
 Além disso, é necessário configurar a url, username e senha para o banco em `application.properties`.
 
@@ -37,4 +37,4 @@ O relatório do projeto encontra-se no diretório `docs`.
 
 ## 4. API
 
-É possível testar os endpoints e visualizar a documentação da API rodando a aplicação e acessando a [UI Swagger](https://swagger.io/tools/swagger-ui/) no endereço **http://localhost:8080/api-doc**.
+É possível testar os endpoints e visualizar a documentação da API rodando a aplicação e acessando a [UI Swagger](https://swagger.io/tools/swagger-ui/) no endereço **http://localhost:8083/api-doc**.
