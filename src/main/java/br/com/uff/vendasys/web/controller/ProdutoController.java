@@ -2,6 +2,7 @@ package br.com.uff.vendasys.web.controller;
 
 import br.com.uff.vendasys.domain.entity.Produto;
 import br.com.uff.vendasys.service.ProdutoService;
+import br.com.uff.vendasys.web.dto.CategoriaDTO;
 import br.com.uff.vendasys.web.dto.ProdutoDTO;
 import br.com.uff.vendasys.web.utils.MapperUtil;
 import io.swagger.v3.oas.annotations.Operation;
@@ -23,6 +24,7 @@ import java.util.Objects;
 @RestController
 @RequestMapping("produto")
 @Tag(name = "Produto")
+@CrossOrigin
 public class ProdutoController {
 
     @Autowired

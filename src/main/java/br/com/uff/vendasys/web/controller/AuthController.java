@@ -6,16 +6,16 @@ import br.com.uff.vendasys.service.UsuarioService;
 import br.com.uff.vendasys.service.exception.LoginUsuarioException;
 import br.com.uff.vendasys.web.dto.UsuarioDTO;
 import br.com.uff.vendasys.web.utils.MapperUtil;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
-import javax.validation.Valid;
-
-@Controller
+@RestController
 @RequestMapping("auth")
+@Tag(name = "auth")
+@CrossOrigin
 public class AuthController {
 
     @Autowired
@@ -27,7 +27,7 @@ public class AuthController {
     MapperUtil mapperUtil = MapperUtil.getInstance();
 
     @PostMapping("login")
-    public UsuarioDTO login (@RequestBody @Valid UsuarioDTO usuarioDTO) {
+    public UsuarioDTO login (@RequestBody UsuarioDTO usuarioDTO) {
         try {
             Usuario usuario = authService.login(mapperUtil.mapTo(usuarioDTO, Usuario.class));
             return mapperUtil.mapTo(usuario, UsuarioDTO.class);

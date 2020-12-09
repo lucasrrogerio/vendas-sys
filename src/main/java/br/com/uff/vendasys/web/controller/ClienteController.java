@@ -21,6 +21,7 @@ import java.util.Objects;
 @RestController
 @RequestMapping("cliente")
 @Tag(name = "Cliente")
+@CrossOrigin
 public class ClienteController {
 
     @Autowired

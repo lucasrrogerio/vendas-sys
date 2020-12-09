@@ -4,6 +4,7 @@ import br.com.uff.vendasys.domain.enums.TipoUsuario;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.Objects;
 
 @Entity
 public class Usuario {
@@ -63,7 +64,9 @@ public class Usuario {
     }
 
     public void setTipoUsuarioEnum(TipoUsuario tipoUsuarioEnum) {
-        this.tipoUsuario = tipoUsuarioEnum.name();
-        this.tipoUsuarioEnum = tipoUsuarioEnum;
+        if(Objects.nonNull(this.tipoUsuarioEnum)) {
+            this.tipoUsuario = tipoUsuarioEnum.name();
+            this.tipoUsuarioEnum = tipoUsuarioEnum;
+        }
     }
 }

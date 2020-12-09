@@ -21,7 +21,7 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public Usuario login(Usuario usuario) {
-        Usuario usuarioAutenticado = usuarioRepository.login(usuario.getEmail(), encoder.encode(usuario.getSenha()));
+        Usuario usuarioAutenticado = usuarioRepository.login(usuario.getEmail(), usuario.getSenha());
         if (Objects.isNull(usuarioAutenticado)) throw new LoginUsuarioException("Usuario nao autenticado");
         return usuarioAutenticado;
     }

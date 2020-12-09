@@ -2,7 +2,6 @@ package br.com.uff.vendasys.web.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
-@JsonInclude(JsonInclude.Include.NON_NULL)
 public class CategoriaDTO {
     private Long id;
     private String codigo;

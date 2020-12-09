@@ -2,10 +2,12 @@ package br.com.uff.vendasys.web.dto;
 
 import br.com.uff.vendasys.domain.enums.TipoUsuario;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.validation.constraints.Email;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class UsuarioDTO {
     public Long id;
     @Email

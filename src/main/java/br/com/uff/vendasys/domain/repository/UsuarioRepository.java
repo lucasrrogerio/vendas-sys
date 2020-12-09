@@ -23,5 +23,5 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
     List<Usuario> buscarTodosVendedores();
 
     @Query("SELECT u FROM Usuario u WHERE u.email = :email AND u.senha = :senha")
-    Usuario login(String email, String senha);
+    Usuario login(@Param("email") String email, @Param("senha") String senha);
 }
