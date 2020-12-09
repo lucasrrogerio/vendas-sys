@@ -28,6 +28,7 @@ import java.util.Objects;
 @RestController
 @RequestMapping("venda")
 @Tag(name = "Venda")
+@CrossOrigin
 public class VendaController {
 
     @Autowired

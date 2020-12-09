@@ -1,5 +1,7 @@
 package br.com.uff.vendasys.web.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class ProdutoDTO {
 
     private Long id;
@@ -8,7 +10,8 @@ public class ProdutoDTO {
     private String descricao;
     private Double preco;
     private int qtdEstoque;
-    private String codBarras;
+    @JsonProperty(value = "codBarras")
+    private String codigoBarras;
     private boolean isAtivo;
     private FornecedorDTO fornecedor;
     private PromocaoDTO promocao;
@@ -65,12 +68,12 @@ public class ProdutoDTO {
         this.qtdEstoque = qtdEstoque;
     }
 
-    public String getCodBarras() {
-        return codBarras;
+    public String getCodigoBarras() {
+        return codigoBarras;
     }
 
-    public void setCodBarras(String codBarras) {
-        this.codBarras = codBarras;
+    public void setCodigoBarras(String codigoBarras) {
+        this.codigoBarras = codigoBarras;
     }
 
     public boolean isAtivo() {
